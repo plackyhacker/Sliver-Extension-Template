@@ -62,6 +62,25 @@ char** parse_args(char* input_string, size_t* arg_count) {
     // final token
     args[count] = input_string + start_index;
 
+    // there is something a little buggy here...
+    // if the final argument is passed using '"an argument"' then garbage is on the end of the buffer
+    // this is a result of wroking around: https://github.com/BishopFox/sliver/issues/1493
+    char* final_str = args[count];
+    if (*final_str == '"')
+    {
+        for (uint32_t i = 1; i < MAX_STRING_LENGTH; ++i)
+        {
+            char c = *final_str + i;
+            if (c == '"')
+            {
+                uint32_t offset = i + 1;
+                *(final_str + offset) = '\0';
+                break;
+            }
+        }
+    }
+    // end - this will do until Sliver v1.6 arrives
+    
     // make sure we set the arg count
     *arg_count = count + 1;
 
