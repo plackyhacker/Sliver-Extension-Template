@@ -18,7 +18,7 @@ int Execute(char* argsBuffer, uint32_t bufferSize, goCallback callback)
 	size_t arg_count = 0;
 
 	// parse the arguments first
-	if (*argsBuffer != '\0')
+	if (bufferSize > 0)
 	{
 		char** args = parse_args(argsBuffer, &arg_count);
 	}
