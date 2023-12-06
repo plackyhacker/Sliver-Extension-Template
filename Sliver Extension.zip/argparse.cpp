@@ -64,7 +64,7 @@ char** parse_args(char* input_string, size_t* arg_count) {
 
     // there is something a little buggy here...
     // if the final argument is passed using '"an argument"' then garbage is on the end of the buffer
-    // this is a result of wroking around: https://github.com/BishopFox/sliver/issues/1493
+    // this is a result of working around: https://github.com/BishopFox/sliver/issues/1493
     char* final_str = args[count];
     if (*final_str == '"')
     {
